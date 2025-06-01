@@ -1,8 +1,114 @@
-{% extends 'core/layout.html' %}
 
-{% block title %}Reports{% endblock %}
+{% extends 'core/layout.html' %}
+{% load static %}
+
+{% block title %}Reports - Dental Clinic{% endblock %}
 
 {% block content %}
-<h1>Report Dashboard</h1>
-{# Content for report dashboard goes here #}
-{% endblock %} 
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-chart-line text-primary me-2"></i>
+                        Reports & Analytics
+                    </h2>
+                    <p class="text-muted mb-0">Practice performance and insights</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-download me-2"></i>
+                        Export Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-calendar-check fa-3x text-primary mb-3"></i>
+                    <h5>Appointment Report</h5>
+                    <p class="text-muted">Daily, weekly, monthly schedules</p>
+                    <button class="btn btn-outline-primary">View Report</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-chart-bar fa-3x text-success mb-3"></i>
+                    <h5>Financial Report</h5>
+                    <p class="text-muted">Revenue and payment analysis</p>
+                    <button class="btn btn-outline-success">View Report</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-users fa-3x text-info mb-3"></i>
+                    <h5>Patient Report</h5>
+                    <p class="text-muted">Demographics and statistics</p>
+                    <button class="btn btn-outline-info">View Report</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-tooth fa-3x text-warning mb-3"></i>
+                    <h5>Treatment Report</h5>
+                    <p class="text-muted">Treatment success rates</p>
+                    <button class="btn btn-outline-warning">View Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts and Analytics -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-area me-2"></i>
+                        Revenue Trend
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-placeholder bg-light rounded d-flex align-items-center justify-content-center" style="height: 300px;">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-chart-line fa-3x mb-3"></i>
+                            <p>Revenue chart would be displayed here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-chart-pie me-2"></i>
+                        Treatment Distribution
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-placeholder bg-light rounded d-flex align-items-center justify-content-center" style="height: 300px;">
+                        <div class="text-center text-muted">
+                            <i class="fas fa-chart-pie fa-3x mb-3"></i>
+                            <p>Treatment pie chart would be displayed here</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

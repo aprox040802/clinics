@@ -1,88 +1,177 @@
-<html>
-  <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
 
-    <title>Bite Works</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+{% extends 'core/layout.html' %}
+{% load static %}
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
-      <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#0d151c]">
-            <div class="size-4">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
-              </svg>
+{% block title %}Billing - Dental Clinic{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-dollar-sign text-primary me-2"></i>
+                        Billing & Payments
+                    </h2>
+                    <p class="text-muted mb-0">Manage invoices and payment records</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        Create New Invoice
+                    </button>
+                </div>
             </div>
-            <h2 class="text-[#0d151c] text-lg font-bold leading-tight tracking-[-0.015em]">Biteworks</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-[#0d151c] text-sm font-medium leading-normal" href="{% url 'dashboard' %}">Dashboard</a>
-              <a class="text-[#0d151c] text-sm font-medium leading-normal" href="#">Reports</a>
-            </div>
-            <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrCkTs-0d7jsVphpV3cJyOCIWMV2bUf13L0KZL_CWenatceqDBXxsjGLElQdKWPZLQ8QvZFmULhg8jF5drPihV5lUjVndkbqjQ4qS1dRXRUwinaRALI_-vCaca6PgWwlASw6HZg38GKOrZuLdiIft-7VGtGkIVT...");'
-            ></div>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight min-w-72">Process Payment</p></div>
-            <h3 class="text-[#0d151c] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Payment Details</h3>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <p class="text-[#0d151c] text-base font-medium leading-normal pb-2">Total Amount Due</p>
-                <input
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
-            </div>
-            <h3 class="text-[#0d151c] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Payment Method</h3>
-            <div class="flex flex-wrap gap-3 p-4">
-              <label
-                class="text-sm font-medium leading-normal flex items-center justify-center rounded-xl border border-[#cedce8] px-4 h-11 text-[#0d151c] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#0b80ee] relative cursor-pointer"
-              >
-                Cash
-                <input type="radio" class="invisible absolute" name="560f4240-db3c-40c5-90cf-dfd97f06e8b3" />
-              </label>
-              <label
-                class="text-sm font-medium leading-normal flex items-center justify-center rounded-xl border border-[#cedce8] px-4 h-11 text-[#0d151c] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#0b80ee] relative cursor-pointer"
-              >
-                GCash
-                <input type="radio" class="invisible absolute" name="560f4240-db3c-40c5-90cf-dfd97f06e8b3" />
-              </label>
-            </div>
-            <h3 class="text-[#0d151c] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">GCash Payment</h3>
-            <div class="flex w-full grow bg-slate-50 @container p-4">
-              <div class="w-full gap-1 overflow-hidden bg-slate-50 @[480px]:gap-2 aspect-[3/2] rounded-xl flex">
-                <div
-                  class="w-full bg-center bg-no-repeat bg-cover aspect-auto rounded-none flex-1"
-                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOt4gv7xDUm--QW1ug51n00gFl9ruvQ8YRDrIPW1U7rTDwiod-ZbEdHpvFyDuaL2-WJ0Svd_x8wCUETO9DdZDobhngx9wsyz53SAVgwANViy0REVdlGS-jxyBoUV14RFk_o0a-8XnJBX8XNQ2q1c-8k9xHKDejxUojR5utTqruWfQYYT_BTCglAMAcGkmBybPbsb-Hpt51gbHV9-h8gwpiCWtuqHco8DpVL6_55veqVMeFO7_1mutsxLOEtVV-UUcuenvaOJ7zAaEI");'
-                ></div>
-              </div>
-            </div>
-            <div class="flex px-4 py-3 justify-end">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#0b80ee] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate">Confirm Payment</span>
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </body>
-</html> 
+
+    <!-- Financial Overview -->
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Total Revenue</h5>
+                            <h3 class="mb-0">₱145,250</h3>
+                        </div>
+                        <div>
+                            <i class="fas fa-chart-line fa-2x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Pending Invoices</h5>
+                            <h3 class="mb-0">12</h3>
+                        </div>
+                        <div>
+                            <i class="fas fa-file-invoice fa-2x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">Overdue</h5>
+                            <h3 class="mb-0">₱8,450</h3>
+                        </div>
+                        <div>
+                            <i class="fas fa-exclamation-triangle fa-2x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title">This Month</h5>
+                            <h3 class="mb-0">₱45,200</h3>
+                        </div>
+                        <div>
+                            <i class="fas fa-calendar-month fa-2x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Invoices -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-file-invoice-dollar me-2"></i>
+                        Recent Invoices
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Patient</th>
+                                    <th>Treatment</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>INV-2024-001</strong></td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                                                ED
+                                            </div>
+                                            <strong>Emma Davis</strong>
+                                        </div>
+                                    </td>
+                                    <td>Dental Cleaning</td>
+                                    <td>₱2,500</td>
+                                    <td>2024-01-15</td>
+                                    <td><span class="badge bg-success">Paid</span></td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-sm btn-outline-primary" title="View Invoice">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Print">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>INV-2024-002</strong></td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                                                OB
+                                            </div>
+                                            <strong>Olivia Bennett</strong>
+                                        </div>
+                                    </td>
+                                    <td>Root Canal</td>
+                                    <td>₱15,000</td>
+                                    <td>2024-01-18</td>
+                                    <td><span class="badge bg-warning">Pending</span></td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-sm btn-outline-primary" title="View Invoice">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Send Reminder">
+                                                <i class="fas fa-bell"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

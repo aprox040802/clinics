@@ -1,8 +1,164 @@
-{% extends 'core/layout.html' %}
 
-{% block title %}Treatments{% endblock %}
+{% extends 'core/layout.html' %}
+{% load static %}
+
+{% block title %}Treatments - Dental Clinic{% endblock %}
 
 {% block content %}
-<h1>Treatment List</h1>
-{# Content for treatment list goes here #}
-{% endblock %} 
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-tooth text-primary me-2"></i>
+                        Treatment Management
+                    </h2>
+                    <p class="text-muted mb-0">Manage treatment plans and procedures</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-2"></i>
+                        Add Treatment Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Treatment Categories -->
+    <div class="row mb-4">
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-broom fa-3x mb-3"></i>
+                    <h5>Preventive Care</h5>
+                    <p class="mb-0">Cleanings, Exams, X-rays</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-fill-drip fa-3x mb-3"></i>
+                    <h5>Restorative</h5>
+                    <p class="mb-0">Fillings, Crowns, Bridges</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-procedures fa-3x mb-3"></i>
+                    <h5>Surgical</h5>
+                    <p class="mb-0">Extractions, Root Canals</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <i class="fas fa-smile fa-3x mb-3"></i>
+                    <h5>Cosmetic</h5>
+                    <p class="mb-0">Whitening, Veneers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Active Treatment Plans -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-clipboard-list me-2"></i>
+                        Active Treatment Plans
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Treatment</th>
+                                    <th>Start Date</th>
+                                    <th>Progress</th>
+                                    <th>Next Appointment</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                                                ED
+                                            </div>
+                                            <strong>Emma Davis</strong>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>Root Canal Treatment</strong><br>
+                                        <small class="text-muted">Tooth #14</small>
+                                    </td>
+                                    <td>2024-01-10</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" style="width: 75%">75%</div>
+                                        </div>
+                                    </td>
+                                    <td>2024-01-25</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Update Progress">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px;">
+                                                OB
+                                            </div>
+                                            <strong>Olivia Bennett</strong>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>Dental Implant</strong><br>
+                                        <small class="text-muted">Tooth #6</small>
+                                    </td>
+                                    <td>2024-01-05</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 40%">40%</div>
+                                        </div>
+                                    </td>
+                                    <td>2024-02-01</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-success" title="Update Progress">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
