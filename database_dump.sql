@@ -1,4 +1,5 @@
 
+
 -- MySQL Database Dump for Biteworks Dental Management System
 -- Complete database structure with all apps
 -- Compatible with phpMyAdmin
@@ -139,6 +140,24 @@ CREATE TABLE `billing_billing` (
   KEY `billing_billing_appointment_id` (`appointment_id`),
   CONSTRAINT `billing_billing_patient_id_fk` FOREIGN KEY (`patient_id`) REFERENCES `patients_patient` (`id`),
   CONSTRAINT `billing_billing_appointment_id_fk` FOREIGN KEY (`appointment_id`) REFERENCES `appointments_appointment` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table structure for table `billing_payment_transaction`
+CREATE TABLE `billing_payment_transaction` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `billing_id` int(11) NOT NULL,
+  `transaction_id` varchar(100) NOT NULL,
+  `payment_method` varchar(10) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'pending',
+  `reference_number` varchar(100) DEFAULT NULL,
+  `payment_gateway_response` longtext,
+  `processed_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `transaction_id` (`transaction_id`),
+  KEY `billing_payment_transaction_billing_id` (`billing_id`),
+  CONSTRAINT `billing_payment_transaction_billing_id_fk` FOREIGN KEY (`billing_id`) REFERENCES `billing_billing` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -283,23 +302,37 @@ INSERT INTO `appointments_appointment` (`id`, `patient_id`, `date`, `time`, `app
 (2, 2, '2024-03-16', '14:30:00.000000', 'short', 'scheduled', 'Deep cleaning required', '2024-01-16 11:30:00.000000', '2024-01-16 11:30:00.000000'),
 (3, 3, '2024-03-17', '09:00:00.000000', 'medium', 'completed', 'Cavity filling on molar', '2024-01-17 12:30:00.000000', '2024-01-17 12:30:00.000000');
 
--- Sample billing records
+-- Sample billing records with updated payment methods
 INSERT INTO `billing_billing` (`id`, `patient_id`, `appointment_id`, `amount`, `payment_method`, `status`, `date_issued`, `date_paid`, `notes`) VALUES
 (1, 1, 1, 150.00, 'cash', 'paid', '2024-03-14', '2024-03-14', 'Paid in full'),
-(2, 2, 2, 200.00, 'gcash', 'unpaid', '2024-03-16', NULL, 'Payment pending'),
-(3, 3, 3, 120.00, 'cash', 'paid', '2024-03-17', '2024-03-17', 'Paid after treatment');
+(2, 2, 2, 200.00, 'gcash', 'unpaid', '2024-03-16', NULL, 'Payment pending via GCash'),
+(3, 3, 3, 120.00, 'cash', 'paid', '2024-03-17', '2024-03-17', 'Paid after treatment'),
+(4, 1, NULL, 80.00, 'paymaya', 'paid', '2024-03-20', '2024-03-20', 'Payment via PayMaya'),
+(5, 2, NULL, 350.00, 'card', 'partial', '2024-03-21', NULL, 'Partial payment via credit card'),
+(6, 3, NULL, 180.00, 'bdo', 'unpaid', '2024-03-22', NULL, 'BDO bank transfer pending');
+
+-- Sample payment transactions
+INSERT INTO `billing_payment_transaction` (`id`, `billing_id`, `transaction_id`, `payment_method`, `amount`, `status`, `reference_number`, `payment_gateway_response`, `processed_at`, `created_at`) VALUES
+(1, 2, 'GCASH_TXN_001', 'gcash', 200.00, 'pending', 'GC202403160001', '{"status": "pending", "reference": "GC202403160001"}', NULL, '2024-03-16 14:45:00.000000'),
+(2, 4, 'PAYMAYA_TXN_001', 'paymaya', 80.00, 'completed', 'PM202403200001', '{"status": "success", "reference": "PM202403200001"}', '2024-03-20 16:30:00.000000', '2024-03-20 16:25:00.000000'),
+(3, 5, 'CARD_TXN_001', 'card', 175.00, 'completed', 'CC202403210001', '{"status": "success", "reference": "CC202403210001"}', '2024-03-21 11:15:00.000000', '2024-03-21 11:10:00.000000'),
+(4, 6, 'BDO_TXN_001', 'bdo', 180.00, 'pending', 'BDO202403220001', '{"status": "pending", "reference": "BDO202403220001"}', NULL, '2024-03-22 09:20:00.000000');
 
 -- Sample treatments
 INSERT INTO `treatments_treatment` (`id`, `name`, `description`, `duration`, `cost`, `category`, `created_at`, `updated_at`) VALUES
 (1, 'Dental Cleaning', 'Professional teeth cleaning and prophylaxis', 60, 100.00, 'Preventive', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
 (2, 'Tooth Filling', 'Composite resin filling for cavities', 45, 80.00, 'Restorative', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
-(3, 'Root Canal', 'Root canal therapy for infected teeth', 120, 300.00, 'Endodontic', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000');
+(3, 'Root Canal', 'Root canal therapy for infected teeth', 120, 300.00, 'Endodontic', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
+(4, 'Teeth Whitening', 'Professional teeth whitening treatment', 90, 200.00, 'Cosmetic', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
+(5, 'Dental Crown', 'Porcelain crown placement', 120, 450.00, 'Restorative', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000');
 
 -- Sample inventory items
 INSERT INTO `inventory_item` (`id`, `name`, `description`, `quantity`, `unit_price`, `supplier`, `expiry_date`, `minimum_stock`, `category`, `created_at`, `updated_at`) VALUES
 (1, 'Composite Resin', 'Tooth-colored filling material', 50, 25.00, 'Dental Supply Co', '2025-12-31', 10, 'Materials', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
 (2, 'Dental Gloves', 'Disposable examination gloves', 1000, 0.15, 'Medical Supplies Inc', '2025-06-30', 100, 'PPE', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
-(3, 'Local Anesthetic', 'Lidocaine injection for pain relief', 20, 8.50, 'Pharma Dental', '2025-03-15', 5, 'Medications', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000');
+(3, 'Local Anesthetic', 'Lidocaine injection for pain relief', 20, 8.50, 'Pharma Dental', '2025-03-15', 5, 'Medications', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
+(4, 'Dental Mirrors', 'Stainless steel dental mirrors', 25, 12.00, 'Dental Tools Ltd', NULL, 5, 'Instruments', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000'),
+(5, 'Sterilization Pouches', 'Self-sealing sterilization pouches', 500, 0.25, 'Sterilization Co', '2025-09-30', 50, 'Sterilization', '2024-01-01 00:00:00.000000', '2024-01-01 00:00:00.000000');
 
 -- --------------------------------------------------------
 -- AUTO INCREMENT VALUES
@@ -312,12 +345,14 @@ ALTER TABLE `django_content_type` AUTO_INCREMENT=1;
 ALTER TABLE `django_migrations` AUTO_INCREMENT=1;
 ALTER TABLE `patients_patient` AUTO_INCREMENT=4;
 ALTER TABLE `appointments_appointment` AUTO_INCREMENT=4;
-ALTER TABLE `billing_billing` AUTO_INCREMENT=4;
-ALTER TABLE `treatments_treatment` AUTO_INCREMENT=4;
+ALTER TABLE `billing_billing` AUTO_INCREMENT=7;
+ALTER TABLE `billing_payment_transaction` AUTO_INCREMENT=5;
+ALTER TABLE `treatments_treatment` AUTO_INCREMENT=6;
 ALTER TABLE `treatments_patienttreatment` AUTO_INCREMENT=1;
-ALTER TABLE `inventory_item` AUTO_INCREMENT=4;
+ALTER TABLE `inventory_item` AUTO_INCREMENT=6;
 ALTER TABLE `staff_staff` AUTO_INCREMENT=1;
 ALTER TABLE `reports_report` AUTO_INCREMENT=1;
 ALTER TABLE `communication_message` AUTO_INCREMENT=1;
 
 COMMIT;
+
