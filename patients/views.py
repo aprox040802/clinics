@@ -7,9 +7,18 @@ from django.http import HttpResponse
 def patient_list_view(request):
     return render(request, 'patients/patient_list.html')
 
-@login_required  
+from .forms import PatientForm
+
+@login_required
 def register_patient(request):
-    return render(request, 'patients/patient_list.html')
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('patients:patient_list')
+    else:
+        form = PatientForm()
+    return render(request, 'patients/patient_register.html', {'form': form})
 
 @login_required
 def patient_detail(request, patient_id):

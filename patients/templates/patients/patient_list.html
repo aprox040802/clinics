@@ -18,10 +18,10 @@
                     <p class="text-muted mb-0">Manage patient records and information</p>
                 </div>
                 <div>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-user-plus me-2"></i>
-                        Add New Patient
-                    </button>
+                    <a href="{% url 'patients:register_patient' %}" class="btn btn-primary">
+    <i class="fas fa-user-plus me-2"></i>
+    Add New Patient
+</a>
                 </div>
             </div>
         </div>
