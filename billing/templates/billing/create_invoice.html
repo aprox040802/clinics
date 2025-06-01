@@ -1,0 +1,75 @@
+
+{% extends 'core/layout.html' %}
+{% load static %}
+
+{% block title %}Create Invoice - Dental Clinic{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-file-invoice text-primary me-2"></i>
+                        Create New Invoice
+                    </h2>
+                    <p class="text-muted mb-0">Generate a new billing invoice</p>
+                </div>
+                <div>
+                    <a href="{% url 'billing:billing_list' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Billing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Invoice Details</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.patient.id_for_label }}" class="form-label">Patient</label>
+                                {{ form.patient }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.appointment.id_for_label }}" class="form-label">Appointment (Optional)</label>
+                                {{ form.appointment }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.amount.id_for_label }}" class="form-label">Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₱</span>
+                                    {{ form.amount }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ form.payment_method.id_for_label }}" class="form-label">Payment Method</label>
+                                {{ form.payment_method }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.notes.id_for_label }}" class="form-label">Notes</label>
+                            {{ form.notes }}
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Create Invoice
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

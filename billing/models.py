@@ -5,8 +5,10 @@ from appointments.models import Appointment
 class Billing(models.Model):
     PAYMENT_METHODS = [
         ("cash", "Cash"),
-        ("bdo", "BDO Bank Transfer"),
-        ("gcash", "GCash")
+        ("gcash", "GCash"),
+        ("paymaya", "PayMaya"),
+        ("card", "Credit/Debit Card"),
+        ("bdo", "BDO Bank Transfer")
     ]
     STATUS_CHOICES = [
         ("unpaid", "Unpaid"),
