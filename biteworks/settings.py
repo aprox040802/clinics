@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$nsbkgtz(gm0ho%@=g-!n_xgtxd(1n&*z1-8lscey&8y2$7oh_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,12 +83,8 @@ WSGI_APPLICATION = 'biteworks.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dental',
-        'USER': 'root',  # Change to your MySQL username
-        'PASSWORD': '',  # Change to your MySQL password
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

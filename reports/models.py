@@ -1,26 +1,21 @@
-
 from django.db import models
+from django.contrib.auth.models import User
 
 class Report(models.Model):
     REPORT_TYPES = [
-        ('daily_appointments', 'Daily Appointments'),
-        ('monthly_revenue', 'Monthly Revenue'),
-        ('patient_visits', 'Patient Visit History'),
-        ('inventory_status', 'Inventory Status'),
-        ('staff_schedule', 'Staff Schedule'),
-        ('treatment_summary', 'Treatment Summary'),
+        ('financial', 'Financial Report'),
+        ('patient', 'Patient Report'),
+        ('appointment', 'Appointment Report'),
+        ('inventory', 'Inventory Report'),
     ]
-    
-    name = models.CharField(max_length=200)
-    report_type = models.CharField(max_length=25, choices=REPORT_TYPES)
-    description = models.TextField(blank=True, null=True)
-    generated_by = models.CharField(max_length=100)  # In production, use User model
+
+    title = models.CharField(max_length=200)
+    report_type = models.CharField(max_length=20, choices=REPORT_TYPES)
+    date_from = models.DateField()
+    date_to = models.DateField()
+    generated_by = models.ForeignKey(User, on_delete=models.CASCADE)
     generated_at = models.DateTimeField(auto_now_add=True)
-    parameters = models.JSONField(blank=True, null=True)  # Store report parameters
-    file_path = models.CharField(max_length=500, blank=True, null=True)  # Path to generated file
+    file_path = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name} - {self.generated_at.strftime('%Y-%m-%d')}"
-
-    class Meta:
-        ordering = ['-generated_at']
+        return self.title
