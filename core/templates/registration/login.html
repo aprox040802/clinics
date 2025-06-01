@@ -1,0 +1,235 @@
+{% extends 'core/layout.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f0f2f5; /* Lighter background color */
+    }
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    .login-card {
+        display: flex;
+        max-width: 900px; /* Adjust width as needed */
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+    .login-form-section {
+        padding: 40px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .login-form-section h2 {
+        font-weight: bold;
+        color: #333;
+    }
+    .login-form-section p {
+        color: #666;
+        margin-bottom: 30px;
+    }
+    .form-group {
+        margin-bottom: 25px;
+    }
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        border-radius: 0;
+        padding: 10px 0;
+        box-shadow: none;
+    }
+    .form-group input[type="text"]:focus,
+    .form-group input[type="password"]:focus {
+        border-color: #007bff; /* Highlight color on focus */
+        box-shadow: none;
+        outline: none;
+    }
+    .password-group {
+        position: relative;
+    }
+    .password-group .toggle-password {
+        position: absolute;
+        right: 0;
+        top: 10px; /* Adjust as needed */
+        cursor: pointer;
+        color: #555;
+    }
+    .options-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 0.9em;
+    }
+    .promo-section {
+        flex: 1;
+        background-color: #007bff; /* Adjust color to match image */
+        color: white;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-image: url('{% static "core/img/promotional_background.jpg" %}'); /* Use your promotional background image */
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        overflow: hidden; /* Hide overflowing shapes */
+    }
+     .promo-section::before { /* Blue overlay */
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 123, 255, 0.8); /* Adjust opacity as needed */
+        z-index: 1;
+    }
+    .promo-content {
+        position: relative;
+        z-index: 2; /* Ensure content is above overlay and shapes */
+    }
+    .promo-section h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    .promo-section h1 {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .circular-image {
+        width: 120px; /* Adjust size */
+        height: 120px; /* Adjust size */
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid white; /* White border */
+        margin-top: 20px; /* Space from text */
+    }
+     .star-icon {
+        color: #ff9800; /* Orange color */
+        font-size: 3em; /* Adjust size */
+        margin-bottom: 20px;
+    }
+    .btn-login {
+        background-color: #343a40; /* Dark color */
+        border-color: #343a40;
+        color: white;
+        border-radius: 25px; /* Rounded corners */
+        padding: 10px 20px;
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+    .btn-signup {
+        background-color: #e0e0e0; /* Light grey */
+        border-color: #e0e0e0;
+        color: #333;
+        border-radius: 25px; /* Rounded corners */
+        padding: 10px 20px;
+        font-size: 1.1em;
+    }
+
+     /* Abstract Shapes (basic representation) */
+    .promo-section::after { /* Example shape */
+        content: '';
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        top: 50px;
+        left: -75px;
+        z-index: 0;
+    }
+     .promo-section .shape-2 { /* Another example shape */
+        content: '';
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        bottom: 30px;
+        right: -100px;
+        z-index: 0;
+    }
+
+</style>
+
+<div class="container login-container">
+    <div class="login-card">
+        <div class="login-form-section">
+            <div class="text-center mb-4">
+                <i class="fas fa-star star-icon"></i> {# Using Font Awesome for star #}
+                <h2>Welcome Biteworks Dental Clinic     !</h2>
+                <p>Please enter your details</p>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_username">Username:</label> {# Changed label to Email as per image #}
+                    {{ form.username }}
+                </div>
+                <div class="form-group password-group">
+                    <label for="id_password">Password:</label>
+                    {{ form.password }}
+                    <i class="fas fa-eye toggle-password"></i> {# Placeholder for toggle password icon #}
+                </div>
+
+                <div class="options-bar">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me?</label>
+                    </div>
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-login w-100">Log In</button>
+                <button type="button" class="btn btn-signup w-100"><i class="fas fa-globe"></i> Sign Up</button>
+            </form>
+        </div>
+        <div class="promo-section">
+             <div class="promo-content">
+                <h3>Dental Clinic</h3>
+                <h1>We Care For Your Health</h1>
+                {# The large background image is set via CSS #}
+                <img src="{% static 'core/img/gfd.png' %}" alt="Doctor" class="circular-image"> {# Placeholder for smaller circular image #}
+            </div>
+             {# Abstract Shapes (basic representation) #}
+            <div class="shape-2"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.querySelector('#id_password'); // Assuming the password input has id 'id_password'
+
+    togglePassword.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+{% endblock %} 

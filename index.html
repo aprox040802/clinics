@@ -1,0 +1,515 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.css' rel='stylesheet' />
+    <style>
+      .layout-content-container[id$="-section"] {
+        display: none;
+      }
+    </style>
+    {% block extra_style %}{% endblock %}
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-slate-50 group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7edf4] px-10 py-3">
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-4 text-[#0d141c]">
+              <div class="size-4">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+                </svg>
+              </div>
+              <h2 class="text-[#0d141c] text-lg font-bold leading-tight tracking-[-0.015em]">Biteworks</h2>
+            </div>
+            <div class="flex items-center gap-9">
+              <a class="text-[#101518] text-sm font-medium leading-normal" href="{% url 'dashboard' %}">Dashboard</a>
+              <a class="text-[#101518] text-sm font-medium leading-normal" href="#">Calendar</a>
+              <a class="text-[#101518] text-sm font-medium leading-normal" href="#">Patients</a>
+              <a class="text-[#101518] text-sm font-medium leading-normal" href="/reports">Reports</a>
+              <a class="text-[#101518] text-sm font-medium leading-normal" href="#">Billing</a>
+            </div>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <label class="flex flex-col min-w-40 !h-10 max-w-64">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-[#49739c] flex border-none bg-[#e7edf4] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                  data-icon="MagnifyingGlass"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  placeholder="Search"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border-none bg-[#e7edf4] focus:border-none h-full placeholder:text-[#49739c] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  value=""
+                />
+              </div>
+            </label>
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#e7edf4] text-[#0d141c] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            >
+              <div class="text-[#0d141c]" data-icon="Bell" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDC_YNwf2vD2IowiwEaPbpxxmVH86vLM-697QzX3v08RNMcp3FBBX6UnxEmG-CIMIV3sCALBztLbolvk8HBll9WOTyU45G3neTkiOrZH06M-5k9omS896XCj27j7Kbhkzd_TcIiju6vCMoeDQ6WzO6YHc_Dz_nQgaRwVdOEVIhIsYt0cKkLCf5xP7aTfQs4WZ4C-_FXLV7ZNVJWl5MXksn58F4uUUpjY2D5jNdjb9mroUxUlQwGxdWN60HJhfB6AMfpXJfBv0JMOAZ4");'
+            ></div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1" id="dashboard-section">
+            <!-- Dashboard content goes here -->
+            <h2>Welcome to the Dashboard</h2>
+            <p>This area will show key metrics and summaries.</p>
+            <p>Click on 'Patients' in the navigation to see the patient list.</p>
+          </div>
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1" id="patients-section">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">Patients</p>
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#e7edf4] text-[#0d141c] text-sm font-medium leading-normal"
+              >
+                <span class="truncate">New Patient</span>
+              </button>
+            </div>
+            <div class="px-4 py-3">
+              <label class="flex flex-col min-w-40 h-12 w-full">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                  <div
+                    class="text-[#49739c] flex border-none bg-[#e7edf4] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                    data-icon="MagnifyingGlass"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <input
+                    placeholder="Search patients"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d141c] focus:outline-0 focus:ring-0 border-none bg-[#e7edf4] focus:border-none h-full placeholder:text-[#49739c] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                    value=""
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="px-4 py-3 @container">
+              <div class="flex overflow-hidden rounded-lg border border-[#cedbe8] bg-slate-50">
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-slate-50">
+                      <th class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 px-4 py-3 text-left text-[#0d141c] w-[400px] text-sm font-medium leading-normal">Name</th>
+                      <th class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 px-4 py-3 text-left text-[#0d141c] w-[400px] text-sm font-medium leading-normal">
+                        Date of Birth
+                      </th>
+                      <th class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 px-4 py-3 text-left text-[#0d141c] w-[400px] text-sm font-medium leading-normal">Phone</th>
+                      <th class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 px-4 py-3 text-left text-[#0d141c] w-[400px] text-sm font-normal leading-normal">Email</th>
+                      <th class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 px-4 py-3 text-left text-[#0d141c] w-[400px] text-sm font-normal leading-normal">
+                        Last Visit
+                      </th>
+                      <th class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Sophia Clark
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1985-03-15
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 123-4567
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        sophia.clark@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-11-20
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Ethan Bennett
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1992-07-22
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 987-6543
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        ethan.bennett@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-12-05
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Olivia Hayes
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1978-11-10
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 246-8013
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        olivia.hayes@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-10-15
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Liam Foster
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1989-05-03
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 135-7924
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        liam.foster@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-11-28
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Ava Morgan
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1995-09-18
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 369-1245
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        ava.morgan@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-12-10
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Noah Carter
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1982-01-25
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 789-0123
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        noah.carter@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-11-12
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Isabella Reed
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1998-04-08
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 456-7890
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        isabella.reed@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-12-01
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Jackson Cole
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1975-08-12
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 654-3210
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        jackson.cole@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-10-20
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Mia Hughes
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1991-12-30
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 987-1234
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        mia.hughes@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-11-18
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#cedbe8]">
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120 h-[72px] px-4 py-2 w-[400px] text-[#0d141c] text-sm font-normal leading-normal">
+                        Aiden Parker
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        1987-06-05
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        (555) 321-6547
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        aiden.parker@email.com
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600 h-[72px] px-4 py-2 w-[400px] text-[#49739c] text-sm font-normal leading-normal">
+                        2023-12-08
+                      </td>
+                      <td class="table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720 h-[72px] px-4 py-2 w-60 text-[#49739c] text-sm font-bold leading-normal tracking-[0.015em]">
+                        View
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <style>
+                          @container(max-width:120px){.table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-120{display: none;}}
+                @container(max-width:240px){.table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-240{display: none;}}
+                @container(max-width:360px){.table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-360{display: none;}}
+                @container(max-width:480px){.table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-480{display: none;}}
+                @container(max-width:600px){.table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-600{display: none;}}
+                @container(max-width:720px){.table-d9076056-ba56-4dc1-b8fe-8f444ba4cb1f-column-720{display: none;}}
+              </style>
+            </div>
+          </div>
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1" id="appointments-section">
+            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-[#0d151c] tracking-light text-[32px] font-bold leading-tight min-w-72">New Appointment</p></div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <select
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 bg-[image:--select-button-svg] placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                >
+                  <option value="one">Select Patient</option>
+                  <option value="two">two</option>
+                  <option value="three">three</option>
+                </select>
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <input
+                  placeholder="Date"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <select
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 bg-[image:--select-button-svg] placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                >
+                  <option value="one">Time</option>
+                  <option value="two">two</option>
+                  <option value="three">three</option>
+                </select>
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <select
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] h-14 bg-[image:--select-button-svg] placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                >
+                  <option value="one">Appointment Type</option>
+                  <option value="two">two</option>
+                  <option value="three">three</option>
+                </select>
+              </label>
+            </div>
+            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-40 flex-1">
+                <textarea
+                  placeholder="Notes"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#0d151c] focus:outline-0 focus:ring-0 border border-[#cedce8] bg-slate-50 focus:border-[#cedce8] min-h-36 placeholder:text-[#49749c] p-[15px] text-base font-normal leading-normal"
+                ></textarea>
+              </label>
+            </div>
+            <div class="flex px-4 py-3 justify-end">
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#0b80ee] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Create Appointment</span>
+              </button>
+            </div>
+          </div>
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1" id="calendar-section">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight min-w-72">Calendar</p>
+            </div>
+            <div id="calendar-ui"></div>
+            <div id="available-time-slots" class="p-4"></div>
+            {% block calendar_content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('.navigation-links a');
+      const sections = document.querySelectorAll('.layout-content-container[id$="-section"]');
+      let calendar = null; // Variable to hold the calendar object
+
+      // Function to hide all content sections
+      const hideAllSections = () => {
+        sections.forEach(section => {
+          section.style.display = 'none';
+        });
+      };
+
+      // Function to remove active class from all links
+      const removeActiveClass = () => {
+        navLinks.forEach(link => {
+          link.classList.remove('bg-[#e7edf4]', 'rounded-lg', 'px-2.5', 'py-1.5');
+        });
+      };
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          // Check if the link is internal to the SPA or a full navigation link
+          const targetUrl = link.getAttribute('href');
+          if (targetUrl && targetUrl.startsWith('#')) {
+            e.preventDefault(); // Prevent default anchor behavior only for internal links
+
+            hideAllSections(); // Hide all sections first
+            removeActiveClass();
+
+            // Add active class to the clicked link
+            link.classList.add('bg-[#e7edf4]', 'rounded-lg', 'px-2.5', 'py-1.5');
+
+            // Show the target section
+            const targetId = targetUrl;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.style.display = 'flex'; // Set target section to flex display
+
+              // If the target section is the calendar, render the calendar
+              if (targetId === '#calendar-section' && calendar) {
+                calendar.render();
+              }
+            }
+          }
+          // For links that are not internal (like the Dashboard link pointing to '/'),
+          // the default browser navigation will occur.
+        });
+      });
+
+      // Trigger click on Dashboard or initial section based on URL hash/path on load
+      const initialTargetId = window.location.hash;
+      const initialPathname = window.location.pathname;
+      let initialSectionLink = null;
+
+      if (initialTargetId) {
+        initialSectionLink = document.querySelector(`.navigation-links a[href="${initialTargetId}"]`);
+      } else if (initialPathname === '/patients/') {
+        initialSectionLink = document.querySelector(".navigation-links a[href='#patients-section']");
+      } else if (initialPathname === '/appointments/calendar/') {
+        initialSectionLink = document.querySelector(".navigation-links a[href='/appointments/calendar/']");
+      } else {
+        // Default to Dashboard link if no hash or specific paths
+        initialSectionLink = document.querySelector(".navigation-links a[href='/']");
+      }
+
+      if (initialSectionLink) {
+        initialSectionLink.click(); // Programmatically click the link to show the section and trigger rendering if needed
+      } else {
+        // Fallback if no initial link is found (shouldn't happen with Dashboard default)
+        hideAllSections();
+        removeActiveClass();
+      }
+
+      // Ensure calendar is rendered if on the calendar page initially
+      if (initialPathname === '/appointments/calendar/') {
+          const calendarSection = document.getElementById('calendar-section');
+          if (calendarSection) {
+              calendarSection.style.display = 'flex'; // Ensure calendar section is visible
+              if (calendar) {
+                  calendar.render(); // Render the calendar
+              }
+          }
+      }
+    });
+  </script>
+</html> 
